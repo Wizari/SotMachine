@@ -12,7 +12,6 @@ public class Card {
     public float heightCard,widthCard; // размеры карты
 
     public void render(SpriteBatch batch){
-
         cardSprite.draw(batch);
     }
 

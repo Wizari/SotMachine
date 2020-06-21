@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gmail.wizaripost.managers.GameManager;
+import com.gmail.wizaripost.managers.InputManager;
 
 public class MyGdxGame extends ApplicationAdapter {
 
@@ -40,6 +41,7 @@ public class MyGdxGame extends ApplicationAdapter {
 //		InputManager.handleInput(camera);
         // передаём вид с "камеры" в наш spritebatch
         batch.setProjectionMatrix(camera.combined);
+        InputManager.handleInput(camera);
         // отрисовка игровых объектов
         batch.begin();
         GameManager.renderGame(batch);

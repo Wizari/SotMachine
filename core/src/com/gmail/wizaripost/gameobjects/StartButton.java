@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StartButton {
-    static Sprite startButtonSprite;
+   public static Sprite startButtonSprite;
     static Texture startButtonTexture;
     static final float START_BUTTON_RESIZE_FACTOR = 1500f;
 

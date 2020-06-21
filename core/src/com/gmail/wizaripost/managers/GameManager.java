@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.gmail.wizaripost.gameobjects.Card;
 import com.gmail.wizaripost.gameobjects.StartButton;
 
@@ -19,7 +20,9 @@ public class GameManager {
     private static float ZOMBIE1_HORIZ_POSITION_FACTOR = 5.8f;
     private static float ZOMBIE2_HORIZ_POSITION_FACTOR = 2.4f;
     private static float ZOMBIE3_HORIZ_POSITION_FACTOR = 1.5f;
+    static Vector3 temp = new Vector3(); // временный вектор для хранения входных координат
     static Card card;
+
 
 
     public static void initialize(float width, float height) {
