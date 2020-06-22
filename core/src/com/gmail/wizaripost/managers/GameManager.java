@@ -29,7 +29,7 @@ public class GameManager {
         backBotSprite.setSize(width, height);
         backBotSprite.setPosition(0, 0f);
 
-        SpinLine.initialize(width, height, 0, 0, -15f, 0.02f, 200);
+        SpinLine.initialize(width, height, 0, 0, -0.10f, 0.05f, 200);
         StartButton.initialize(width, height);
         FrameRate.initialize(width, height);
     }
@@ -39,10 +39,9 @@ public class GameManager {
 //        card.render(batch);
 //        SpinLine.update();
         SpinLine.renderSpinLine(batch);
-        backBotSprite.draw(batch);
+//        backBotSprite.draw(batch);
         StartButton.displayStartButton(batch);
         FrameRate.displayMessage(batch);
-
     }
 
 
