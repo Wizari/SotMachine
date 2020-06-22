@@ -20,7 +20,8 @@ public class SpinLine {
     boolean flag;
 
 
-    public void initialize(float width, float height, float yPosition, float xPosition, float speed, float slowdown, int size) {
+    public void initialize(float width, float height, float xPosition, float yPosition,
+                           float speed, float slowdown, int size, int id) {
         flag = true;
         cards = new Array<Card>();
 
