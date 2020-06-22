@@ -18,16 +18,11 @@ public class SpinLine {
     static float slow;
     static float spe;
     static Card.State level;
-
-
-
+    public enum State {STAY, MOVE} // определение состояний
     public static float scaleFactor; // коэффициент масштабирования зомби
-//
-//    public enum State {STAY, MOVE} // определение состояний
-//    public static State state = State.STAY; // переменная, описывающая текущее состояние
 
 
-    public static void initialize(float width, float height, float yPosition, float xPosition, float speed, float slowdown, int size) {
+    public void initialize(float width, float height, float yPosition, float xPosition, float speed, float slowdown, int size) {
         cards = new Array<Card>();
         float range = 0f;
         slow = slowdown;
@@ -56,18 +51,18 @@ public class SpinLine {
         }
     }
 
-    public static void update(Card cardX) {
+    public  void update(Card cardX) {
 //        card.position.add(card.velocity);
 //        card.velocity.add(card.slowdown); // обновление значения переменной velocity путем добавления к нему значения переменной gravity
 //        card.cardSprite.setPosition(card.position.x, card.position.y);
 //        System.out.println("update");
-        switch (cardX.getState()) {
+        switch (cardX.state) {
             case MOVE:
                 if (cardX.velocity.y >= 0.0f) {
                     cardX.slowdown.y = 0.0f;
                     cardX.velocity.y = 0.0f;
                     cardX.state = Card.State.STAY;
-//                    System.out.println(card.state);
+                    System.out.println(card.state);
                 }
 //                currentHeight-=speed;
 //                if(currentHeight<=0.0){
@@ -83,17 +78,17 @@ public class SpinLine {
 //        card.cardSprite.setSize(card.cardSprite.getWidth(), currentHeight);
     }
 
-    public static void renderSpinLine(SpriteBatch batch) {
+    public void renderSpinLine(SpriteBatch batch) {
 //        card.render(batch);
         for (Card card1 : cards) {
+            update(card1);
             card1.render(batch);
             card1.update();
-            update(card1);
         }
     }
 
 
-    public static void dispose() {
+    public void dispose() {
 
     }
 }

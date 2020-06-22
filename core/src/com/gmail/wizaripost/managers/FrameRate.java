@@ -13,7 +13,7 @@ public class FrameRate {
     // размеры области просмотра нашей игры
     static float width,height;
 
-    public static void initialize(float width,float height){
+    public void initialize(float width,float height){
 
         font = new BitmapFont();
         FrameRate.width = width;
@@ -24,7 +24,7 @@ public class FrameRate {
         font.getData().setScale(width/800f);
     }
 
-    public static void displayMessage(SpriteBatch batch){
+    public  void displayMessage(SpriteBatch batch){
 
         // объект класса GlyphLayout хранит в себе информацию о шрифте и содержании текста
         GlyphLayout glyphLayout = new GlyphLayout();

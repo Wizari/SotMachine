@@ -8,10 +8,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.gmail.wizaripost.managers.GameManager;
 import com.gmail.wizaripost.managers.InputManager;
 
-public class MyGdxGame extends ApplicationAdapter {
+public class SlotMachineCore extends ApplicationAdapter {
 
     SpriteBatch batch; // spritebatch ("пачка спрайтов") для отрисовки
     OrthographicCamera camera;
+    GameManager gameManager;
+    InputManager inputManager;
+
+
+
 
     @Override
     public void create() {
@@ -22,7 +27,9 @@ public class MyGdxGame extends ApplicationAdapter {
         camera = new OrthographicCamera(width, height);
         camera.setToOrtho(false); // центруем камеру (w/2, h/2) этой строкой
         batch = new SpriteBatch();
-        GameManager.initialize(width, height);//инициализируем игру
+        gameManager = new GameManager();
+        gameManager.initialize(width, height);
+        inputManager = new InputManager();
     }
 
     @Override
@@ -30,7 +37,7 @@ public class MyGdxGame extends ApplicationAdapter {
         super.dispose();
         //утилизация SpriteBatch и текстур
         batch.dispose();
-        GameManager.dispose();
+        gameManager.dispose();
     }
 
     @Override
@@ -41,10 +48,11 @@ public class MyGdxGame extends ApplicationAdapter {
 //		InputManager.handleInput(camera);
         // передаём вид с "камеры" в наш spritebatch
         batch.setProjectionMatrix(camera.combined);
-        InputManager.handleInput(camera);
+        inputManager.handleInput(camera);
         // отрисовка игровых объектов
         batch.begin();
-        GameManager.renderGame(batch);
+        gameManager.renderGame(batch);
+//        GameManager.renderGame(batch);
         batch.end();
     }
 

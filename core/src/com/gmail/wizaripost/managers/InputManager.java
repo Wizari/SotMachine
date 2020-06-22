@@ -7,7 +7,7 @@ import com.gmail.wizaripost.utility.GetRandomCardTextureName;
 
 public class InputManager {
 
-    public static void handleInput(OrthographicCamera camera) {
+    public void handleInput(OrthographicCamera camera) {
 
         // Было ли касание экрана?
         if (Gdx.input.justTouched()) {
@@ -26,7 +26,7 @@ public class InputManager {
     }
 
 
-    public static void handleStartButton(float touchX, float touchY) {
+    public void handleStartButton(float touchX, float touchY) {
         // определяем, было ли касание кнопки start, используя границы спрайта
         if ((touchX >= StartButton.startButtonSprite.getX()) && touchX <= (StartButton.startButtonSprite.getX() + StartButton.startButtonSprite.getWidth()) && (touchY >= StartButton.startButtonSprite.getY()) && touchY <= (StartButton.startButtonSprite.getY() + StartButton.startButtonSprite.getHeight())) {
 //            System.out.println("StartButton");

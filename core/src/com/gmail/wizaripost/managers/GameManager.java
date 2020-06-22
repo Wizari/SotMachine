@@ -12,41 +12,47 @@ public class GameManager {
 
     static Texture backTexture;
     static Sprite backSprite;
-    static Texture backBotTexture;
-    static Sprite backBotSprite;
-
+    static Texture botTopTexture;
+    static Sprite botTopSprite;
     static Vector3 temp = new Vector3(); // временный вектор для хранения входных координат
+    static FrameRate frameRate;
+    static SpinLine spinLine;
+    static StartButton startButton;
 
 
 
-    public static void initialize(float width, float height) {
+    public void initialize(float width, float height) {
         backTexture = new Texture(Gdx.files.internal("background.jpg"));
         backSprite = new Sprite(backTexture);
-        backBotTexture = new Texture(Gdx.files.internal("BotTop.png"));
-        backBotSprite = new Sprite(backBotTexture);
+        botTopTexture = new Texture(Gdx.files.internal("BotTop.png"));
+        botTopSprite = new Sprite(botTopTexture);
         backSprite.setSize(width, height);
         backSprite.setPosition(0, 0f);
-        backBotSprite.setSize(width, height);
-        backBotSprite.setPosition(0, 0f);
-
-        SpinLine.initialize(width, height, 0, 0, -0.10f, 0.05f, 200);
-        StartButton.initialize(width, height);
-        FrameRate.initialize(width, height);
+        botTopSprite.setSize(width, height);
+        botTopSprite.setPosition(0, 0f);
+        spinLine = new SpinLine();
+        spinLine.initialize(width, height, 0, 0, -5.10f, 0.05f, 200);
+        startButton = new StartButton();
+        startButton.initialize(width, height);
+        frameRate = new FrameRate();
+        frameRate.initialize(width, height);
     }
 
-    public static void renderGame(SpriteBatch batch) {
+    public void renderGame(SpriteBatch batch) {
         backSprite.draw(batch);
 //        card.render(batch);
 //        SpinLine.update();
-        SpinLine.renderSpinLine(batch);
+        spinLine.renderSpinLine(batch);
 //        backBotSprite.draw(batch);
-        StartButton.displayStartButton(batch);
-        FrameRate.displayMessage(batch);
+        startButton.displayStartButton(batch);
+//        FrameRate.displayMessage(batch);
+        frameRate.displayMessage(batch);
     }
 
 
-    public static void dispose() {
-
+    public void dispose() {
+        backTexture.dispose();
+        botTopTexture.dispose();
     }
 
 }
