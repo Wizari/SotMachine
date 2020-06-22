@@ -15,7 +15,8 @@ public class Card {
     public Vector2 velocity = new Vector2(); // вектор для обозначения скорости
     public final Vector2 slowdown = new Vector2(0,+0.00f);// вектор для обозначения замедления
     public enum State {STAY, MOVE} // определение состояний
-    public  State state = State.MOVE; // переменная, описывающая текущее состояние
+//    public  State state = State.MOVE; // переменная, описывающая текущее состояние
+    public  State state; // переменная, описывающая текущее состояние
 
     public void render(SpriteBatch batch){
         cardSprite.draw(batch);

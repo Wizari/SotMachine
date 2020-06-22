@@ -6,12 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.gmail.wizaripost.exceptions.OutOfRangeException;
 import com.gmail.wizaripost.utility.GetRandomCardTextureName;
 import com.gmail.wizaripost.utility.Helper;
+import lombok.Data;
 
+@Data
 public class SpinLine {
-     Array<Card> cards; // массив карт
+    Array<Card> cards; // массив карт
     static Texture cardTexture; // текстурное изображение нашего зомби
     private static float CARD_RESIZE_FACTOR = 1500f;
     Card card;
@@ -23,19 +24,15 @@ public class SpinLine {
 //    private float xPos;
 
 
-    public void initialize(float width, float height, float xPosition, float yPosition,
-                           float speed, float slowdown, int size, int id)  {
+    public void initialize(float width, float height, float speed, float slowdown, int size, int id) {
         flag = true;
         cards = new Array<Card>();
-        float f = 0;
-        xPosition = 0;
+        float xPosition = 0;
+        float yPosition = 0;
 
         float range = 0f;
         slow = slowdown;
         spe = speed;
-
-
-
 
         for (int i = 0; i < size; i++) {
             card = new Card();
@@ -44,11 +41,10 @@ public class SpinLine {
             float XWidth = card.cardSprite.getWidth() * (width / CARD_RESIZE_FACTOR);
             card.cardSprite.setSize(XWidth, card.cardSprite.getHeight() * (width / CARD_RESIZE_FACTOR)); // устанавливаем размер спрайта
 //            card.cardSprite.setRegion(0, 0, (int)(width/scaleFactor), (int)(currentHeight/scaleFactor));
-            card.velocity.set(0, spe);
-            card.slowdown.set(0, slow);
-            card.state = Card.State.MOVE;
-            if (f == 0) {
-                f = XWidth;
+
+            card.state = Card.State.STAY;
+            if (xPosition == 0) {
+//                f = XWidth;
                 xPosition = Helper.getXPosition(width, XWidth, 10, id);
             }
 
@@ -76,22 +72,21 @@ public class SpinLine {
                         if (cardX.position.y <= 0.9f && cardX.position.y >= -0.9f) {
                             System.out.println(cardX.position.y);
                             flag = false;
-//                            for (Card card1 : cards) {
-//                                card1.state = Card.State.STAY;
-//                                cardX.slowdown.y = 0.0f;
-//                                cardX.velocity.y = 0.0f;
-                            }
 
                         }
+
                     }
+                }
                 if (!flag) {
                     cardX.state = Card.State.STAY;
                     cardX.slowdown.y = 0.0f;
                     cardX.velocity.y = 0.0f;
                 }
                 break;
-//            case STAY:
-//                break;
+            case STAY:
+                flag = true;
+
+                break;
         }
     }
 
@@ -108,5 +103,25 @@ public class SpinLine {
 
     public void dispose() {
         cardTexture.dispose();
+    }
+
+    public void setState(Card.State state) {
+        for (Card card1 : cards) {
+            if (state == Card.State.MOVE) {
+                card1.state = state;
+//                flag = true;
+                card1.velocity.set(0, spe);
+                card1.slowdown.set(0, slow);
+            } else {
+                card1.state = state;
+            }
+        }
+    }
+
+    public void run() {
+        for (Card card1 : cards) {
+            card.velocity.set(0, 20f);
+            card.slowdown.set(0, 0.3f);
+        }
     }
 }
