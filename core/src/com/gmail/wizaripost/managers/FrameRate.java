@@ -24,7 +24,7 @@ public class FrameRate {
         font.getData().setScale(width/800f);
     }
 
-    public  void displayMessage(SpriteBatch batch){
+    public  void displayFPS(SpriteBatch batch){
 
         // объект класса GlyphLayout хранит в себе информацию о шрифте и содержании текста
         GlyphLayout glyphLayout = new GlyphLayout();

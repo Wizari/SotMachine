@@ -10,14 +10,18 @@ import com.gmail.wizaripost.gameobjects.StartButton;
 
 public class GameManager {
 
-    static Texture backTexture;
-    static Sprite backSprite;
-    static Texture botTopTexture;
-    static Sprite botTopSprite;
+    private static Texture backTexture;
+    private static Sprite backSprite;
+    private static Texture botTopTexture;
+    private static Sprite botTopSprite;
     static Vector3 temp = new Vector3(); // временный вектор для хранения входных координат
-    static FrameRate frameRate;
-    static SpinLine spinLine;
-    static StartButton startButton;
+    private static FrameRate frameRate;
+    private static SpinLine spinLine;
+    private static SpinLine spinLine2;
+    private static SpinLine spinLine3;
+    private static SpinLine spinLine4;
+    private static SpinLine spinLine5;
+    private static StartButton startButton;
 
 
 
@@ -31,7 +35,16 @@ public class GameManager {
         botTopSprite.setSize(width, height);
         botTopSprite.setPosition(0, 0f);
         spinLine = new SpinLine();
-        spinLine.initialize(width, height, 0, 0, -5.10f, 0.05f, 200);
+        spinLine.initialize(width, height, 0, 0, -10.00f, 0.1f, 200);
+        spinLine2 = new SpinLine();
+        spinLine2.initialize(width, height, 0, 100, -20.00f, 0.1f, 200);
+        spinLine3 = new SpinLine();
+        spinLine3.initialize(width, height, 0, 200, -30.00f, 0.1f, 200);
+        spinLine4 = new SpinLine();
+        spinLine4.initialize(width, height, 0, 300, -40.00f, 0.1f, 200);
+        spinLine5 = new SpinLine();
+        spinLine5.initialize(width, height, 0, 400, -50.00f, 0.1f, 300);
+
         startButton = new StartButton();
         startButton.initialize(width, height);
         frameRate = new FrameRate();
@@ -43,10 +56,14 @@ public class GameManager {
 //        card.render(batch);
 //        SpinLine.update();
         spinLine.renderSpinLine(batch);
-//        backBotSprite.draw(batch);
+        spinLine2.renderSpinLine(batch);
+        spinLine3.renderSpinLine(batch);
+        spinLine4.renderSpinLine(batch);
+        spinLine5.renderSpinLine(batch);
+        botTopSprite.draw(batch);
         startButton.displayStartButton(batch);
 //        FrameRate.displayMessage(batch);
-        frameRate.displayMessage(batch);
+        frameRate.displayFPS(batch);
     }
 
 

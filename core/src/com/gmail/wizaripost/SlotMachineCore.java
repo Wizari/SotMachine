@@ -10,10 +10,10 @@ import com.gmail.wizaripost.managers.InputManager;
 
 public class SlotMachineCore extends ApplicationAdapter {
 
-    SpriteBatch batch; // spritebatch ("пачка спрайтов") для отрисовки
-    OrthographicCamera camera;
-    GameManager gameManager;
-    InputManager inputManager;
+    private SpriteBatch batch; // spritebatch ("пачка спрайтов") для отрисовки
+    private OrthographicCamera camera;
+    private GameManager gameManager;
+    private InputManager inputManager;
 
 
 
@@ -45,14 +45,12 @@ public class SlotMachineCore extends ApplicationAdapter {
         // Очищаем экран
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//		InputManager.handleInput(camera);
         // передаём вид с "камеры" в наш spritebatch
         batch.setProjectionMatrix(camera.combined);
         inputManager.handleInput(camera);
         // отрисовка игровых объектов
         batch.begin();
         gameManager.renderGame(batch);
-//        GameManager.renderGame(batch);
         batch.end();
     }
 

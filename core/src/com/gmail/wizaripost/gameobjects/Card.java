@@ -23,6 +23,7 @@ public class Card {
 
     public void update() {
         position.add(velocity);
+//        position.y = 20;
         velocity.add(slowdown); // обновление значения переменной velocity путем добавления к нему значения переменной gravity
         cardSprite.setPosition(position.x, position.y);
     }

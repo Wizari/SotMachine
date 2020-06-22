@@ -9,21 +9,21 @@ import com.badlogic.gdx.utils.Array;
 import com.gmail.wizaripost.utility.GetRandomCardTextureName;
 
 public class SpinLine {
-    static Array<Card> cards; // массив карт
+     Array<Card> cards; // массив карт
     static Texture cardTexture; // текстурное изображение нашего зомби
     private static float CARD_RESIZE_FACTOR = 1500f;
-    static Card card;
-    static Card cardTemp;
-    public static Vector2 p = new Vector2(); // вектор для обозначения позиции
-    static float slow;
-    static float spe;
+    Card card;
+    public Vector2 p = new Vector2(); // вектор для обозначения позиции
+    float slow;
+    float spe;
     static Card.State level;
-    public enum State {STAY, MOVE} // определение состояний
-    public static float scaleFactor; // коэффициент масштабирования зомби
+    boolean flag;
 
 
     public void initialize(float width, float height, float yPosition, float xPosition, float speed, float slowdown, int size) {
+        flag = true;
         cards = new Array<Card>();
+
         float range = 0f;
         slow = slowdown;
         spe = speed;
@@ -51,32 +51,35 @@ public class SpinLine {
         }
     }
 
-    public  void update(Card cardX) {
-//        card.position.add(card.velocity);
-//        card.velocity.add(card.slowdown); // обновление значения переменной velocity путем добавления к нему значения переменной gravity
-//        card.cardSprite.setPosition(card.position.x, card.position.y);
-//        System.out.println("update");
+    public void update(Card cardX) {
         switch (cardX.state) {
             case MOVE:
-                if (cardX.velocity.y >= 0.0f) {
+                if (flag) {
+                    if (cardX.velocity.y >= -0.8f) {
+//                    cardX.velocity.y = -0.3f;
+                        cardX.slowdown.y = 0.0f;
+                        if (cardX.position.y <= 0.9f && cardX.position.y >= -0.9f) {
+                            System.out.println(cardX.position.y);
+                            flag = false;
+//                            for (Card card1 : cards) {
+//                                card1.state = Card.State.STAY;
+//                                cardX.slowdown.y = 0.0f;
+//                                cardX.velocity.y = 0.0f;
+                            }
+
+                        }
+                    }
+                if (!flag) {
+                    cardX.state = Card.State.STAY;
                     cardX.slowdown.y = 0.0f;
                     cardX.velocity.y = 0.0f;
-                    cardX.state = Card.State.STAY;
-                    System.out.println(card.state);
                 }
-//                currentHeight-=speed;
-//                if(currentHeight<=0.0){
-//                    currentHeight=0.0f;
-//                    state=State.GOINGUP;
-//                }
                 break;
-            case STAY:
-                break;
+//            case STAY:
+//                break;
         }
-        // рисуем только часть изображения зомби. Зависит от высоты над ямой
-//        card.cardSprite.setRegion(0, 0, (int)(card.widthCard/scaleFactor), (int)(currentHeight/scaleFactor));
-//        card.cardSprite.setSize(card.cardSprite.getWidth(), currentHeight);
     }
+
 
     public void renderSpinLine(SpriteBatch batch) {
 //        card.render(batch);
@@ -89,6 +92,6 @@ public class SpinLine {
 
 
     public void dispose() {
-
+        cardTexture.dispose();
     }
 }

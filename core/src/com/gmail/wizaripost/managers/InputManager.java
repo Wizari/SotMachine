@@ -8,7 +8,6 @@ import com.gmail.wizaripost.utility.GetRandomCardTextureName;
 public class InputManager {
 
     public void handleInput(OrthographicCamera camera) {
-
         // Было ли касание экрана?
         if (Gdx.input.justTouched()) {
             // Получаем координаты касания
