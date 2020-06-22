@@ -17,7 +17,6 @@ public class SlotMachineCore extends ApplicationAdapter {
 
 
 
-
     @Override
     public void create() {
         // получаем размеры экрана нашего устройтсва

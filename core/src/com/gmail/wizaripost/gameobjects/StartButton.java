@@ -30,7 +30,7 @@ public class StartButton {
         int a = 1;
     }
 
-    void flashing() {
+    private void flashing() {
 
         if (time >= maxTime) {
             switch (state) {

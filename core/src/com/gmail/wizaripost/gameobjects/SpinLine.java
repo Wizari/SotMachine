@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.gmail.wizaripost.exceptions.OutOfRangeException;
 import com.gmail.wizaripost.utility.GetRandomCardTextureName;
+import com.gmail.wizaripost.utility.Helper;
 
 public class SpinLine {
      Array<Card> cards; // массив карт
@@ -14,29 +16,41 @@ public class SpinLine {
     private static float CARD_RESIZE_FACTOR = 1500f;
     Card card;
     public Vector2 p = new Vector2(); // вектор для обозначения позиции
-    float slow;
-    float spe;
+    private float slow;
+    private float spe;
     static Card.State level;
-    boolean flag;
+    private boolean flag;
+//    private float xPos;
 
 
     public void initialize(float width, float height, float xPosition, float yPosition,
-                           float speed, float slowdown, int size, int id) {
+                           float speed, float slowdown, int size, int id)  {
         flag = true;
         cards = new Array<Card>();
+        float f = 0;
+        xPosition = 0;
 
         float range = 0f;
         slow = slowdown;
         spe = speed;
+
+
+
+
         for (int i = 0; i < size; i++) {
             card = new Card();
             cardTexture = new Texture(Gdx.files.internal(GetRandomCardTextureName.getTexture()));
             card.cardSprite = new Sprite(cardTexture);// загружаем текстуру корзины в спрайт
-            card.cardSprite.setSize(card.cardSprite.getWidth() * (width / CARD_RESIZE_FACTOR), card.cardSprite.getHeight() * (width / CARD_RESIZE_FACTOR)); // устанавливаем размер спрайта
+            float XWidth = card.cardSprite.getWidth() * (width / CARD_RESIZE_FACTOR);
+            card.cardSprite.setSize(XWidth, card.cardSprite.getHeight() * (width / CARD_RESIZE_FACTOR)); // устанавливаем размер спрайта
 //            card.cardSprite.setRegion(0, 0, (int)(width/scaleFactor), (int)(currentHeight/scaleFactor));
             card.velocity.set(0, spe);
             card.slowdown.set(0, slow);
             card.state = Card.State.MOVE;
+            if (f == 0) {
+                f = XWidth;
+                xPosition = Helper.getXPosition(width, XWidth, 10, id);
+            }
 
             if (i > 0) {
                 card.cardSprite.setPosition(xPosition, yPosition + range);
