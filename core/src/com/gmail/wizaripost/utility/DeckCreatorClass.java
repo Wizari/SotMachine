@@ -36,10 +36,36 @@ public class DeckCreatorClass {
         xPosition = array.get(idStartElement).position.x;
         yPosition = array.get(idStartElement).position.y;
         Card card;
+        int skip = 0;
 
         for (int i = 5; i < size; i++) {
+            Texture cardTexture = new Texture(Gdx.files.internal(a + ".jpg"));
             card = new Card();
-            Texture cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+            if (i >= size - 10) {
+                if (skip == 4) {
+                    cardTexture = new Texture(Gdx.files.internal(c + ".jpg"));
+                    skip++;
+                }
+                if (skip == 3) {
+                    cardTexture = new Texture(Gdx.files.internal(b + ".jpg"));
+                    skip++;
+                }
+                if (skip == 2) {
+                    cardTexture = new Texture(Gdx.files.internal(a + ".jpg"));
+                    skip++;
+                }
+                if (skip == 1) {
+                    cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+                    skip++;
+                }
+                if (skip == 0) {
+                    cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+                    card.winCard = true;
+                    skip++;
+                }
+            } else {
+                cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+            }
             card.cardSprite = new Sprite(cardTexture);
             card.cardSprite.setSize(example.cardSprite.getWidth(), example.cardSprite.getHeight()); // устанавливаем размер спрайта
             card.state = Card.State.STAY;
@@ -48,6 +74,7 @@ public class DeckCreatorClass {
             deck.add(card);
             range += card.cardSprite.getHeight() + 6;
         }
+
         return deck;
     }
 }

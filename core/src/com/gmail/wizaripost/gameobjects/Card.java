@@ -12,9 +12,10 @@ public class Card {
     public float heightCard,widthCard; // размеры карты
     public Vector2 position = new Vector2(); // вектор для обозначения позиции
     public Vector2 velocity = new Vector2(); // вектор для обозначения скорости
-    public final Vector2 slowdown = new Vector2(0,+0.00f);// вектор для обозначения замедления
-    public enum State {STAY, MOVE} // определение состояний
+//    public final Vector2 slowdown = new Vector2(0,+0.00f);// вектор для обозначения замедления
+    public enum State {STAY, MOVE, WIN} // определение состояний
     public  State state; // переменная, описывающая текущее состояние
+    public boolean winCard = false;
 
     public void render(SpriteBatch batch){
         cardSprite.draw(batch);
@@ -23,7 +24,7 @@ public class Card {
     public void update() {
         position.add(velocity);
 //        position.y = 20;
-        velocity.add(slowdown); // обновление значения переменной velocity путем добавления к нему значения переменной gravity
+//        velocity.add(slowdown); // обновление значения переменной velocity путем добавления к нему значения переменной gravity
         cardSprite.setPosition(position.x, position.y);
     }
 
