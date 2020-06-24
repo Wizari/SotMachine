@@ -41,8 +41,16 @@ public class SpinLine {
 
     LineSpeed lineSpeed = LineSpeed.STAY;
 
-
-    public void initialize(float width, float height, float speed, int size, int id,
+    /**
+     * @param width ширина экрана приложения
+     * @param height высота экрана приложения
+     * @param size количество карт в колоде
+     * @param id порядковый номер колеса(от 1 до 5)
+     * @param cardA задать карту для выпадения (нижняя)(от 1 до 7)
+     * @param cardB задать карту для выпадения (средняя)(от 1 до 7)
+     * @param cardC задать карту для выпадения (верхняя)(от 1 до 7)
+     */
+    public void initialize(float width, float height, int size, int id,
                            int cardA, int cardB, int cardC) {
         this.cardA = cardA;
         this.cardB = cardB;
