@@ -1,10 +1,8 @@
 package com.gmail.wizaripost.utility;
 
-public class GetRandomCardTextureName {
-//    private int a = 1; // Начальное значение диапазона - "от"
-//    private int b = 7; // Конечное значение диапазона - "до"
+public class GetCardTextureName {
 
-    public static String getTexture() {
+    public static String getRandomTextureName() {
         int a = 1; // Начальное значение диапазона - "от"
         int b = 7; // Конечное значение диапазона - "до"
         int randomNumber = a + (int) (Math.random() * b);

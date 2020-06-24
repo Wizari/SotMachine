@@ -25,7 +25,6 @@ public class StartButton {
         startButtonTexture3 = new Texture(Gdx.files.internal("buttonOrange.png"));
         startButtonSprite = new Sprite(startButtonTexture);
         startButtonSprite.setSize(startButtonSprite.getWidth() * width / START_BUTTON_RESIZE_FACTOR, startButtonSprite.getHeight() * width / START_BUTTON_RESIZE_FACTOR);
-//        startButtonSprite.setPosition(0 ,0);
         startButtonSprite.setPosition((width / 2) - (startButtonSprite.getWidth() / 2), 10);
         int a = 1;
     }
@@ -66,12 +65,3 @@ public class StartButton {
         }
     }
 
-
-
-//            if (startButtonSprite.getTexture() == startButtonTexture) {
-//                startButtonSprite.setTexture(startButtonTexture2);
-//
-//            } else {
-//                startButtonSprite.setTexture(startButtonTexture);
-//
-//            }

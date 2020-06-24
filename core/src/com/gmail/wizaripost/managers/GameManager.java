@@ -25,13 +25,13 @@ public class GameManager {
         background = new Background();
         background.initialize(width, height);
         spinLine = new SpinLine();
-        spinLine.initialize(width, height, -17.00f, 0.1f, 30, 1);
+        spinLine.initialize(width, height, -17.00f, 0.1f, 32, 1);
         spinLine2 = new SpinLine();
-        spinLine2.initialize(width, height, -22.50f, 0.1f, 35, 2);
+        spinLine2.initialize(width, height, -22.50f, 0.1f, 38, 2);
         spinLine3 = new SpinLine();
-        spinLine3.initialize(width, height, -30.00f, 0.1f, 70, 3);
+        spinLine3.initialize(width, height, -30.00f, 0.1f, 72, 3);
         spinLine4 = new SpinLine();
-        spinLine4.initialize(width, height, -40.00f, 0.1f, 100, 4);
+        spinLine4.initialize(width, height, -40.00f, 0.1f, 102, 4);
         spinLine5 = new SpinLine();
         spinLine5.initialize(width, height, -50.00f, 0.1f, 160, 5);
 

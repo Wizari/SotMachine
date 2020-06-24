@@ -6,37 +6,49 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.gmail.wizaripost.utility.GetRandomCardTextureName;
+import com.gmail.wizaripost.utility.DeckCreatorClass;
+import com.gmail.wizaripost.utility.GetCardTextureName;
 import com.gmail.wizaripost.utility.Helper;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class SpinLine {
-    Array<Card> cards; // массив карт
+    @Getter
+    @Setter
+    public Array<Card> cards; // массив карт
     static Texture cardTexture; // текстурное изображение нашего зомби
-    private static float CARD_RESIZE_FACTOR = 1500f;
-    Card card;
+    public static float CARD_RESIZE_FACTOR = 1500f;
+    //    Card card;
     public Vector2 p = new Vector2(); // вектор для обозначения позиции
     private float slow;
-    private float spe;
+    private float speed;
     static Card.State level;
     private boolean flag;
-//    private float xPos;
+    public int size;
+    public float xPosition;
+    public float yPosition;
+    public float range;
+    public static float width;
+    //    boolean stayFlag;
+    public boolean lockButtonStart = true;
 
 
     public void initialize(float width, float height, float speed, float slowdown, int size, int id) {
         flag = true;
         cards = new Array<Card>();
-        float xPosition = 0;
-        float yPosition = 0;
-
-        float range = 0f;
-        slow = slowdown;
-        spe = speed;
-
-        for (int i = 0; i < size; i++) {
+        width = width;
+        this.xPosition = 0;
+        this.yPosition = 0;
+        this.size = size;
+        this.range = 0f;
+        this.slow = slowdown;
+        this.speed = speed;
+        Card card;
+        for (int i = 0; i < 6; i++) {
             card = new Card();
-            cardTexture = new Texture(Gdx.files.internal(GetRandomCardTextureName.getTexture()));
+            cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
             card.cardSprite = new Sprite(cardTexture);// загружаем текстуру корзины в спрайт
             float XWidth = card.cardSprite.getWidth() * (width / CARD_RESIZE_FACTOR);
             card.cardSprite.setSize(XWidth, card.cardSprite.getHeight() * (width / CARD_RESIZE_FACTOR)); // устанавливаем размер спрайта
@@ -59,6 +71,9 @@ public class SpinLine {
             }
             cards.add(card);
             range += card.cardSprite.getHeight() + 6;
+//            System.out.println(card.position.x +" - "+ card.position.y);
+
+            lockButtonStart = false;
         }
     }
 
@@ -72,6 +87,7 @@ public class SpinLine {
                         if (cardX.position.y <= 0.9f && cardX.position.y >= -0.9f) {
                             System.out.println(cardX.position.y);
                             flag = false;
+                            lockButtonStart = false;
 
                         }
 
@@ -79,12 +95,15 @@ public class SpinLine {
                 }
                 if (!flag) {
                     cardX.state = Card.State.STAY;
+//                    stayFlag = true;
                     cardX.slowdown.y = 0.0f;
                     cardX.velocity.y = 0.0f;
                 }
                 break;
             case STAY:
-                flag = true;
+                if (!flag) {
+                    flag = true;
+                }
 
                 break;
         }
@@ -106,11 +125,12 @@ public class SpinLine {
     }
 
     public void setState(Card.State state) {
+        lockButtonStart = true;
         for (Card card1 : cards) {
             if (state == Card.State.MOVE) {
                 card1.state = state;
 //                flag = true;
-                card1.velocity.set(0, spe);
+                card1.velocity.set(0, speed);
                 card1.slowdown.set(0, slow);
             } else {
                 card1.state = state;
@@ -118,10 +138,9 @@ public class SpinLine {
         }
     }
 
-    public void run() {
-        for (Card card1 : cards) {
-            card.velocity.set(0, 20f);
-            card.slowdown.set(0, 0.3f);
-        }
+    public void reRun() {
+        DeckCreatorClass helper = new DeckCreatorClass();
+        cards = helper.deckCreator(cards, size, 1, 1, 1);
+        setState(Card.State.MOVE);
     }
 }

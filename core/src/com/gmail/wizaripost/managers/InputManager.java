@@ -2,9 +2,7 @@ package com.gmail.wizaripost.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.gmail.wizaripost.gameobjects.Card;
 import com.gmail.wizaripost.gameobjects.StartButton;
-import com.gmail.wizaripost.utility.GetRandomCardTextureName;
 
 public class InputManager {
 
@@ -29,19 +27,25 @@ public class InputManager {
     public void handleStartButton(float touchX, float touchY) {
         // определяем, было ли касание кнопки start, используя границы спрайта
         if ((touchX >= StartButton.startButtonSprite.getX()) && touchX <= (StartButton.startButtonSprite.getX() + StartButton.startButtonSprite.getWidth()) && (touchY >= StartButton.startButtonSprite.getY()) && touchY <= (StartButton.startButtonSprite.getY() + StartButton.startButtonSprite.getHeight())) {
-//            System.out.println("StartButton");
-            GameManager.spinLine.setState(Card.State.MOVE);
-            GameManager.spinLine2.setState(Card.State.MOVE);
-            GameManager.spinLine3.setState(Card.State.MOVE);
-            GameManager.spinLine4.setState(Card.State.MOVE);
-            GameManager.spinLine5.setState(Card.State.MOVE);
+//            GameManager.spinLine.setState(Card.State.MOVE);
+//            GameManager.spinLine2.setState(Card.State.MOVE);
+//            GameManager.spinLine3.setState(Card.State.MOVE);
+//            GameManager.spinLine4.setState(Card.State.MOVE);
+//            GameManager.spinLine5.setState(Card.State.MOVE);
 
+            if (!GameManager.spinLine.lockButtonStart &&
+                    !GameManager.spinLine2.lockButtonStart &&
+                    !GameManager.spinLine3.lockButtonStart &&
+                    !GameManager.spinLine4.lockButtonStart &&
+                    !GameManager.spinLine5.lockButtonStart) {
+                GameManager.spinLine.reRun();
+                GameManager.spinLine2.reRun();
+                GameManager.spinLine3.reRun();
+                GameManager.spinLine4.reRun();
+                GameManager.spinLine5.reRun();
+            }
 
-
-            System.out.println(GetRandomCardTextureName.getTexture());
-
-
-            //            GameManager.restartGame();
+            System.out.println("Button start");
         }
     }
 }
