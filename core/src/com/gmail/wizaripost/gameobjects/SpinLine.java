@@ -6,12 +6,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.gmail.wizaripost.controller.ResultController;
 import com.gmail.wizaripost.utility.DeckCreatorClass;
 import com.gmail.wizaripost.utility.GetCardTextureName;
 import com.gmail.wizaripost.utility.Helper;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
 
 @Data
 public class SpinLine {
@@ -33,28 +36,25 @@ public class SpinLine {
     public static float width;
     //    boolean stayFlag;
     public boolean lockButtonStart = true;
-    int cardA;
-    int cardB;
-    int cardC;
-
+    int id;
+    ArrayList<Integer> result;
     public enum LineSpeed {MAX, HIGH, AVERAGE, MIN, STAY} // определение состояний
-
     LineSpeed lineSpeed = LineSpeed.STAY;
+    ResultController resultController;
+
 
     /**
      * @param width ширина экрана приложения
      * @param height высота экрана приложения
      * @param size количество карт в колоде
      * @param id порядковый номер колеса(от 1 до 5)
-     * @param cardA задать карту для выпадения (нижняя)(от 1 до 7)
-     * @param cardB задать карту для выпадения (средняя)(от 1 до 7)
-     * @param cardC задать карту для выпадения (верхняя)(от 1 до 7)
+     * @param result ma
      */
     public void initialize(float width, float height, int size, int id,
-                           int cardA, int cardB, int cardC) {
-        this.cardA = cardA;
-        this.cardB = cardB;
-        this.cardC = cardC;
+                           ArrayList<Integer> result) {
+        resultController = new ResultController();
+         this.id = id;
+        this.result = result;
         moveTrigger = true;
         cards = new Array<Card>();
         width = width;
@@ -250,9 +250,11 @@ public class SpinLine {
         }
     }
 
-    public void reRun() {
+    public void reRun(ArrayList<Integer> result) {
+
+        this.result = result;
         DeckCreatorClass helper = new DeckCreatorClass();
-        cards = helper.deckCreator(cards, size, cardA, cardB, cardC);
+        cards = helper.deckCreator(cards, size, result, id);
 //        for (Card card : cards) {
 //            System.out.println(card.velocity.y);
 //        }

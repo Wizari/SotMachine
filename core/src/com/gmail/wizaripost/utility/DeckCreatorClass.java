@@ -6,16 +6,28 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 import com.gmail.wizaripost.gameobjects.Card;
 
+import java.util.ArrayList;
+
 public class DeckCreatorClass {
 
 
-    public Array deckCreator(Array<Card> array, int size, int a, int b, int c) {
+    public Array deckCreator(Array<Card> array, int size, ArrayList<Integer> result, int id) {
         Card example;
         Array<Card> deck = new Array<Card>();
         int idStartElement = 0;
         float range = 0f;
         float xPosition = 0;
         float yPosition = 0;
+        int a = 1;
+        int b = 2;
+        int c = 3;
+//        for (int i = 0; i < 3; i++) {
+//
+//
+//        }
+        a = result.get(3 * (id - 1));
+        b = result.get((3 * (id - 1))+1);
+        c = result.get((3 * (id - 1))+2);
 
 
         for (int j = 0; j < array.size; j++) {
