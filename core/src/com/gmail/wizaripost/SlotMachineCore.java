@@ -46,7 +46,7 @@ public class SlotMachineCore extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // передаём вид с "камеры" в наш spritebatch
         batch.setProjectionMatrix(camera.combined);
-        inputManager.handleInput(camera);
+        inputManager.handleInput(camera, gameManager);
         // отрисовка игровых объектов
         batch.begin();
         gameManager.renderGame(batch);
