@@ -9,50 +9,13 @@ public class ResultController {
         int b = 7; // Конечное значение диапазона - "до"
         int randomNumber = a + (int) (Math.random() * b);
 //        int randomNumber = 2;
-        if (randomNumber == 1) {
+
             for (int i = 0; i < 15; i++) {
-                array.add(1);
-            }
-            return array;
-        }
-        if (randomNumber == 2) {
-            for (int i = 0; i < 15; i++) {
-                array.add(2);
-            }
-            return array;
-        }
-        if (randomNumber == 3) {
-            for (int i = 0; i < 15; i++) {
-                array.add(3);
-            }
-            return array;
-        }
-        if (randomNumber == 4) {
-            for (int i = 0; i < 15; i++) {
-                array.add(4);
-            }
-            return array;
-        }
-        if (randomNumber == 5) {
-            for (int i = 0; i < 15; i++) {
-                array.add(5);
-            }
-            return array;
-        }
-        if (randomNumber == 6) {
-            for (int i = 0; i < 15; i++) {
-                array.add(6);
-            }
-            return array;
-        } else {
-            for (int i = 0; i < 15; i++) {
-                array.add(7);
+                array.add(randomNumber);
             }
             return array;
         }
 
-//        return
-    }
 
     public ArrayList<Integer> getStartMatrix() {
         ArrayList array = new ArrayList<Integer>();
