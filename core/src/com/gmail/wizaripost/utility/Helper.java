@@ -32,7 +32,7 @@ public class Helper {
 
         } else {
 //            throw new OutOfRangeException("di должен быть от 1 до 5. Ваш id:", id);
-            System.out.println("di должен быть от 1 до 5");
+//            System.out.println("di должен быть от 1 до 5");
         }
         return result;
     }

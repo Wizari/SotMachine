@@ -38,23 +38,25 @@ public class SpinLine {
     public boolean lockButtonStart = true;
     int id;
     ArrayList<Integer> result;
+
     public enum LineSpeed {MAX, HIGH, AVERAGE, MIN, STAY} // определение состояний
+
     LineSpeed lineSpeed = LineSpeed.STAY;
     ResultController resultController;
 
 
     /**
-     * @param width ширина экрана приложения
-     * @param height высота экрана приложения
-     * @param size количество карт в колоде
-     * @param id порядковый номер колеса(от 1 до 5)
-     * @param result ma
+     * @param width       ширина экрана приложения
+     * @param height      высота экрана приложения
+     * @param size        количество карт в колоде
+     * @param id          порядковый номер колеса(от 1 до 5)
+     * @param startMatrix матрица
      */
     public void initialize(float width, float height, int size, int id,
-                           ArrayList<Integer> result) {
+                           ArrayList<Integer> startMatrix) {
         resultController = new ResultController();
-         this.id = id;
-        this.result = result;
+        this.id = id;
+        this.result = startMatrix;
         moveTrigger = true;
         cards = new Array<Card>();
         width = width;
@@ -62,12 +64,28 @@ public class SpinLine {
         this.yPosition = 0;
         this.size = size;
         this.range = 0f;
-//        this.slow = slowdown;
-//        this.speed = speed;
+
         Card card;
-        for (int i = 0; i < 6; i++) {
+        for (int i = (id * 6) - 6; i < id * 6; i++) {
+            if (i >= (((id * 6) - 6) + 2) && i <= (((id * 6) - 6) + 4)) {
+                if (i == ((id * 6) - 6) + 2) {
+                    System.out.println("A = " + i + " / " + startMatrix.get(i) + ".jpg");
+                    System.out.println(startMatrix);
+                    cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
+                }
+                if (i == ((id * 6) - 6) + 3) {
+                    System.out.println("B = " + i + " / " + startMatrix.get(i) + ".jpg");
+                    cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
+                }
+                if (i == ((id * 6) - 6) + 4) {
+                    System.out.println("C = " + i + " / " + startMatrix.get(i) + ".jpg");
+                    cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
+                }
+            } else {
+                cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+            }
+//            cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
             card = new Card();
-            cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
             card.cardSprite = new Sprite(cardTexture);// загружаем текстуру корзины в спрайт
             float XWidth = card.cardSprite.getWidth() * (width / CARD_RESIZE_FACTOR);
             card.cardSprite.setSize(XWidth, card.cardSprite.getHeight() * (width / CARD_RESIZE_FACTOR)); // устанавливаем размер спрайта
@@ -138,31 +156,24 @@ public class SpinLine {
 //                }
                 if (on2) {
                     if (cardX.winCard && cardX.position.y <= 1000f && cardX.position.y >= 500f) {
-//                    lineSpeed = LineSpeed.HIGH;
                         on = true;
                         on2 = false;
                     }
                 }
                 if (on3) {
                     if (cardX.winCard && cardX.position.y <= 500f && cardX.position.y >= 40f) {
-//                    lineSpeed = LineSpeed.AVERAGE;
                         on = true;
                         on3 = false;
                     }
                 }
                 if (on4) {
                     if (cardX.winCard && cardX.position.y <= 40f && cardX.position.y >= 10f) {
-//                    lineSpeed = LineSpeed.MIN;
                         on = true;
                         on4 = false;
                     }
                 }
-//                if (on5) {
-                    if (cardX.winCard && cardX.position.y <= 0.9f && cardX.position.y >= -0.9f) {
-//                    lineSpeed = LineSpeed.STAY;
-//                        on = true;
-                        on5 = false;
-//                    }
+                if (cardX.winCard && cardX.position.y <= 0.9f && cardX.position.y >= -0.9f) {
+                    on5 = false;
                 }
                 switch (lineSpeed) {
                     case MAX:
@@ -184,8 +195,6 @@ public class SpinLine {
                             lockButtonStart = false;
                             cardX.velocity.y = 0.0f;
                             cardX.state = Card.State.STAY;
-//                            on = false;
-
                         }
                         break;
                     case STAY:
@@ -197,9 +206,6 @@ public class SpinLine {
                         on3 = true;
                         on4 = true;
                         on5 = true;
-
-//                            if (!moveTrigger) {
-//                            }
                         break;
                 }
                 break;
@@ -207,7 +213,7 @@ public class SpinLine {
 
             case STAY:
                 if (!moveTrigger) {
-                    System.out.println("case STAY: moveTrigger = true;");
+//                    System.out.println("case STAY: moveTrigger = true;");
                     moveTrigger = true;
                 }
 

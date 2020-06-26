@@ -37,10 +37,9 @@ public class InputManager {
     public void handleStartButton(float touchX, float touchY, GameManager gameManager) {
         // определяем, было ли касание кнопки start, используя границы спрайта
         if ((touchX >= StartButton.startButtonSprite.getX()) && touchX <= (StartButton.startButtonSprite.getX() + StartButton.startButtonSprite.getWidth()) && (touchY >= StartButton.startButtonSprite.getY()) && touchY <= (StartButton.startButtonSprite.getY() + StartButton.startButtonSprite.getHeight())) {
+
             ResultController resultController = new ResultController();
             this.result = resultController.getRandomResult();
-
-
             if (!gameManager.spinLine.lockButtonStart &&
                     !gameManager.spinLine2.lockButtonStart &&
                     !gameManager.spinLine3.lockButtonStart &&
@@ -54,25 +53,7 @@ public class InputManager {
                 gameManager.spinLine5.reRun(result);
             }
 
-//                GameManager.spinLine.reRun();
-//                GameManager.spinLine2.reRun();
-//                GameManager.spinLine3.reRun();
-//                GameManager.spinLine4.reRun();
-//                GameManager.spinLine5.reRun();
-//            }
-//            if (!GameManager.spinLine.lockButtonStart &&
-//                    !GameManager.spinLine2.lockButtonStart &&
-//                    !GameManager.spinLine3.lockButtonStart &&
-//                    !GameManager.spinLine4.lockButtonStart &&
-//                    !GameManager.spinLine5.lockButtonStart) {
-//                GameManager.spinLine.reRun();
-//                GameManager.spinLine2.reRun();
-//                GameManager.spinLine3.reRun();
-//                GameManager.spinLine4.reRun();
-//                GameManager.spinLine5.reRun();
-//            }
-
-            System.out.println("Button start");
+//            System.out.println("Button start");
         }
     }
 }

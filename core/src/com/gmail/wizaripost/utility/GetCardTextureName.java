@@ -9,4 +9,5 @@ public class GetCardTextureName {
         return randomNumber +".jpg";
     }
 
+
 }

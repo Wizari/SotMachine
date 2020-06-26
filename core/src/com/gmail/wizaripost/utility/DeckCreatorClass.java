@@ -34,8 +34,6 @@ public class DeckCreatorClass {
             if (array.get(j).position.y <= 0.9f && array.get(j).position.y >= -0.9f) {
                 idStartElement = j;
                 example = array.get(j);
-                System.out.println("Позиция 0 получена" + example.position.y);
-                System.out.println("Номер 0 элемента " + j);
             }
         }
         for (int i = 0; i < 6; i++) {

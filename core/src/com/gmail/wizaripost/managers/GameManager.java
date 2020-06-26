@@ -26,7 +26,7 @@ public class GameManager {
 
     public void initialize(float width, float height) {
         ResultController resultController = new ResultController();
-        ArrayList<Integer> result = resultController.getRandomResult();
+        ArrayList<Integer> result = resultController.getStartMatrix();
 
         background = new Background();
         background.initialize(width, height);
