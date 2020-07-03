@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.gmail.wizaripost.managers.GameManager;
 import com.gmail.wizaripost.managers.InputManager;
 
@@ -14,6 +15,7 @@ public class SlotMachineCore extends ApplicationAdapter {
     private OrthographicCamera camera;
     private GameManager gameManager;
     private InputManager inputManager;
+    private TextureAtlas textureAtlas;
 
 
 
@@ -27,7 +29,9 @@ public class SlotMachineCore extends ApplicationAdapter {
         camera.setToOrtho(false); // центруем камеру (w/2, h/2) этой строкой
         batch = new SpriteBatch();
         gameManager = new GameManager();
-        gameManager.initialize(width, height);
+        textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/sprites.txt"));
+
+        gameManager.initialize(width, height, textureAtlas);
         inputManager = new InputManager();
     }
 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class DeckCreatorClass {
 
 
-    public Array deckCreator(Array<Card> array, int size, ArrayList<Integer> result, int id) {
+    public Array deckCreator(Array<Card> array, int size, ArrayList<Integer> result, int id, TextureAtlas textureAtlas) {
         Card example;
         Array<Card> deck = new Array<Card>();
         int idStartElement = 0;
@@ -42,7 +42,6 @@ public class DeckCreatorClass {
         yPosition = array.get(idStartElement).position.y;
         Card card;
         int skip = 0;
-        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/sprites.txt"));
 
         for (int i = 5; i < size; i++) {
             card = new Card();

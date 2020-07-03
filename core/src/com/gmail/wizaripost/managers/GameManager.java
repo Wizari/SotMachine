@@ -1,6 +1,7 @@
 package com.gmail.wizaripost.managers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
 import com.gmail.wizaripost.controller.ResultController;
 import com.gmail.wizaripost.gameobjects.Background;
@@ -24,22 +25,22 @@ public class GameManager {
     public SpinLine spinLine5;
     private StartButton startButton;
 
-    public void initialize(float width, float height) {
+    public void initialize(float width, float height, TextureAtlas textureAtlas) {
         ResultController resultController = new ResultController();
         ArrayList<Integer> result = resultController.getStartMatrix();
 
         background = new Background();
         background.initialize(width, height);
         spinLine = new SpinLine();
-        spinLine.initialize(width, height, 30, 1, result);
+        spinLine.initialize(width, height, 30, 1, result, textureAtlas);
         spinLine2 = new SpinLine();
-        spinLine2.initialize(width, height, 40, 2, result);
+        spinLine2.initialize(width, height, 40, 2, result, textureAtlas);
         spinLine3 = new SpinLine();
-        spinLine3.initialize(width, height, 50, 3, result);
+        spinLine3.initialize(width, height, 50, 3, result, textureAtlas);
         spinLine4 = new SpinLine();
-        spinLine4.initialize(width, height, 60, 4, result);
+        spinLine4.initialize(width, height, 60, 4, result, textureAtlas);
         spinLine5 = new SpinLine();
-        spinLine5.initialize(width, height, 70, 5, result);
+        spinLine5.initialize(width, height, 70, 5, result, textureAtlas);
 
         startButton = new StartButton();
         startButton.initialize(width, height);

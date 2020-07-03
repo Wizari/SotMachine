@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gmail.wizaripost.controller.ResultController;
@@ -23,10 +24,8 @@ public class SpinLine {
     public Array<Card> cards; // массив карт
     static Texture cardTexture; // текстурное изображение нашего зомби
     public static float CARD_RESIZE_FACTOR = 1500f;
-    //    Card card;
     public Vector2 p = new Vector2(); // вектор для обозначения позиции
     private float slow;
-    //    private float speed;
     static Card.State level;
     private boolean moveTrigger;
     public int size;
@@ -34,15 +33,13 @@ public class SpinLine {
     public float yPosition;
     public float range;
     public static float width;
-    //    boolean stayFlag;
     public boolean lockButtonStart = true;
     int id;
     ArrayList<Integer> result;
-
     public enum LineSpeed {MAX, HIGH, AVERAGE, MIN, STAY} // определение состояний
-
     LineSpeed lineSpeed = LineSpeed.STAY;
     ResultController resultController;
+    private TextureAtlas textureAtlas;
 
 
     /**
@@ -53,7 +50,7 @@ public class SpinLine {
      * @param startMatrix матрица для отрисовки стартового экрана
      */
     public void initialize(float width, float height, int size, int id,
-                           ArrayList<Integer> startMatrix) {
+                           ArrayList<Integer> startMatrix, TextureAtlas textureAtlas) {
         resultController = new ResultController();
         this.id = id;
         this.result = startMatrix;
@@ -64,6 +61,7 @@ public class SpinLine {
         this.yPosition = 0;
         this.size = size;
         this.range = 0f;
+        this.textureAtlas = textureAtlas;
 
         Card card;
         for (int i = (id * 6) - 6; i < id * 6; i++) {
@@ -256,7 +254,7 @@ public class SpinLine {
 
         this.result = result;
         DeckCreatorClass helper = new DeckCreatorClass();
-        cards = helper.deckCreator(cards, size, result, id);
+        cards = helper.deckCreator(cards, size, result, id, textureAtlas);
 //        for (Card card : cards) {
 //            System.out.println(card.velocity.y);
 //        }
