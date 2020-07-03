@@ -48,6 +48,7 @@ public class SpinLine {
     boolean on3 = true;
     boolean on4 = true;
     boolean on5 = true;
+//    double yZeroPosition;
 
 
     /**
@@ -59,7 +60,11 @@ public class SpinLine {
      * @param textureAtlas TextureAtlas карточек
      */
     public void initialize(float width, float height, int size, int id,
-                           ArrayList<Integer> startMatrix, TextureAtlas textureAtlas) {
+                           ArrayList<Integer> startMatrix, TextureAtlas textureAtlas,
+                           int amountSpinVisibleElements, int amountSpins) {
+
+
+//        this.yZeroPosition = Helper.getYZeroPosition(height, amountSpinVisibleElements);
         resultController = new ResultController();
         this.id = id;
         this.result = startMatrix;
@@ -67,28 +72,30 @@ public class SpinLine {
         cards = new Array<Card>();
         width = width;
         this.xPosition = 0;
-        this.yPosition = 0;
+        this.yPosition = Helper.getYZeroPosition(height, amountSpinVisibleElements);
         this.size = size;
         this.range = 0f;
         this.textureAtlas = textureAtlas;
 
         Card card;
         for (int i = (id * 6) - 6; i < id * 6; i++) {
-            if (i >= (((id * 6) - 6) + 2) && i <= (((id * 6) - 6) + 4)) {
+//            if (i >= (((id * 6) - 6) + 2) && i <= (((id * 6) - 6) + 4)) {
                 card = new Card();
-                if (i == ((id * 6) - 6) + 2) {
+//                if (i == ((id * 6) - 6) + 2) {
                     card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
-                }
-                if (i == ((id * 6) - 6) + 3) {
-                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
-                }
-                if (i == ((id * 6) - 6) + 4) {
-                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
-                }
-            } else {
-                card = new Card();
-                card.cardSprite = new Sprite(textureAtlas.findRegion(GetCardTextureName.getRandomSpriteSheetUnitName()));
-            }
+//                }
+//                if (i == ((id * 6) - 6) + 3) {
+//                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
+//                }
+//                if (i == ((id * 6) - 6) + 4) {
+//                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
+//                }
+//            } else {
+//                card = new Card();
+//                card.cardSprite = new Sprite(textureAtlas.findRegion(GetCardTextureName.getRandomSpriteSheetUnitName()));
+//            }
+
+
             float XWidth = card.cardSprite.getWidth() * (width / CARD_RESIZE_FACTOR);
             card.cardSprite.setSize(XWidth, card.cardSprite.getHeight() * (width / CARD_RESIZE_FACTOR)); // устанавливаем размер спрайта
             card.state = Card.State.STAY;
@@ -115,10 +122,6 @@ public class SpinLine {
         switch (cardX.state) {
             case MOVE:
                 if (numberElement == 0 && on) {
-//                    if (cardX.velocity.y >= -20) {
-//                        lineSpeed = LineSpeed.MAX;
-//                        on = false;
-//                    }
                     if (cardX.velocity.y == -30) {
                         lineSpeed = LineSpeed.HIGH;
                         on = false;
@@ -136,32 +139,25 @@ public class SpinLine {
                         on = false;
                     }
                 }
-//                if (on1) {
-//                    if (cardX.winCard && cardX.position.y >= 1000f) {
-////                    lineSpeed = LineSpeed.MAX;
-//                        on = true;
-//                        on1 = false;
-//                    }
-//                }
                 if (on2) {
-                    if (cardX.winCard && cardX.position.y <= 1000f && cardX.position.y >= 500f) {
+                    if (cardX.winCard && cardX.position.y <= yPosition + 1000f && cardX.position.y >= yPosition + 500f) {
                         on = true;
                         on2 = false;
                     }
                 }
                 if (on3) {
-                    if (cardX.winCard && cardX.position.y <= 500f && cardX.position.y >= 30f) {
+                    if (cardX.winCard && cardX.position.y <= yPosition + 500f && cardX.position.y >= yPosition + 30f) {
                         on = true;
                         on3 = false;
                     }
                 }
                 if (on4) {
-                    if (cardX.winCard && cardX.position.y <= 30f && cardX.position.y >= 10f) {
+                    if (cardX.winCard && cardX.position.y <= yPosition+30f && cardX.position.y >= yPosition + 10f) {
                         on = true;
                         on4 = false;
                     }
                 }
-                if (cardX.winCard && cardX.position.y <= 0.9f && cardX.position.y >= -0.9f) {
+                if (cardX.winCard && cardX.position.y <= yPosition+0.9f && cardX.position.y >= yPosition-0.9f) {
                     on5 = false;
                 }
                 switch (lineSpeed) {
@@ -177,7 +173,7 @@ public class SpinLine {
                     case MIN:
                         cardX.velocity.y = -0.8f;
 
-                        if (cardX.position.y <= 0.9f && cardX.position.y >= -0.9f && cardX.winCard) {
+                        if (cardX.position.y <= yPosition + 0.9f && cardX.position.y >= yPosition -0.9f && cardX.winCard) {
                             lineSpeed = LineSpeed.STAY;
                             System.out.println(cardX.position.y);
                             moveTrigger = false;
@@ -202,7 +198,6 @@ public class SpinLine {
 
             case STAY:
                 if (!moveTrigger) {
-//                    System.out.println("case STAY: moveTrigger = true;");
                     moveTrigger = true;
                 }
 
@@ -249,7 +244,7 @@ public class SpinLine {
 
         this.result = result;
         DeckCreatorClass helper = new DeckCreatorClass();
-        cards = helper.deckCreator(cards, size, result, id, textureAtlas);
+        cards = helper.deckCreator(cards, size, result, id, textureAtlas, yPosition);
 //        for (Card card : cards) {
 //            System.out.println(card.velocity.y);
 //        }

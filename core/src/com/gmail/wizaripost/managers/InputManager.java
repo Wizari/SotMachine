@@ -10,9 +10,17 @@ import java.util.ArrayList;
 public class InputManager {
 
     ArrayList<Integer> result;
+    int amountSpinVisibleElements;
+    int amountSpins;
 
 
-    public void handleInput(OrthographicCamera camera, GameManager gameManager) {
+    public void handleInput(OrthographicCamera camera,
+                            GameManager gameManager,
+                            int amountSpinVisibleElements,
+                            int amountSpins) {
+
+        this.amountSpinVisibleElements = amountSpinVisibleElements;
+        this.amountSpins = amountSpins;
         // Было ли касание экрана?
         if (Gdx.input.justTouched()) {
             // Получаем координаты касания
@@ -37,7 +45,7 @@ public class InputManager {
         if ((touchX >= StartButton.startButtonSprite.getX()) && touchX <= (StartButton.startButtonSprite.getX() + StartButton.startButtonSprite.getWidth()) && (touchY >= StartButton.startButtonSprite.getY()) && touchY <= (StartButton.startButtonSprite.getY() + StartButton.startButtonSprite.getHeight())) {
 
             ResultController resultController = new ResultController();
-            this.result = resultController.getResult();
+            this.result = resultController.getResult(amountSpinVisibleElements, amountSpins);
             if (!gameManager.spinLine.lockButtonStart &&
                     !gameManager.spinLine2.lockButtonStart &&
                     !gameManager.spinLine3.lockButtonStart &&

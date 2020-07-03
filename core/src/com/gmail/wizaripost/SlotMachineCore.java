@@ -16,6 +16,9 @@ public class SlotMachineCore extends ApplicationAdapter {
     private GameManager gameManager;
     private InputManager inputManager;
     private TextureAtlas textureAtlas;
+    private int amountSpinVisibleElements = 4;
+    private int amountSpins = 5;
+
 
 
 
@@ -30,8 +33,7 @@ public class SlotMachineCore extends ApplicationAdapter {
         batch = new SpriteBatch();
         gameManager = new GameManager();
         textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/sprites.txt"));
-
-        gameManager.initialize(width, height, textureAtlas);
+        gameManager.initialize(width, height, textureAtlas, amountSpinVisibleElements, amountSpins);
         inputManager = new InputManager();
     }
 
@@ -50,7 +52,7 @@ public class SlotMachineCore extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // передаём вид с "камеры" в наш spritebatch
         batch.setProjectionMatrix(camera.combined);
-        inputManager.handleInput(camera, gameManager);
+        inputManager.handleInput(camera, gameManager, amountSpinVisibleElements, amountSpins);
         // отрисовка игровых объектов
         batch.begin();
         gameManager.renderGame(batch);

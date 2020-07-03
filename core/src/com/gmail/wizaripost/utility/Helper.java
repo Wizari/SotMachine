@@ -37,5 +37,20 @@ public class Helper {
         return result;
     }
 
+
+    public static float getYZeroPosition (float height, int amountSpinVisibleElements) {
+        float result = 0;
+        if (amountSpinVisibleElements == 3) {
+            result = (height * 0.3556f);
+        }
+        if (amountSpinVisibleElements == 4) {
+            result = (height * 0.20f);
+        }
+        if (result == 0) {
+            System.out.println("ошибка нет готового шаблона под" + amountSpinVisibleElements + " - amountSpinVisibleElements");
+        }
+        return result;
+    }
+
 }
 

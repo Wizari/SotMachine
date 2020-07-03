@@ -9,7 +9,6 @@ import com.gmail.wizaripost.gameobjects.SpinLine;
 import com.gmail.wizaripost.gameobjects.StartButton;
 import lombok.Data;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Data
@@ -25,22 +24,28 @@ public class GameManager {
     public SpinLine spinLine5;
     private StartButton startButton;
 
-    public void initialize(float width, float height, TextureAtlas textureAtlas) {
-        ResultController resultController = new ResultController();
-        ArrayList<Integer> result = resultController.getStartMatrix();
 
+    public void initialize(float width,
+                           float height,
+                           TextureAtlas textureAtlas,
+                           int amountSpinVisibleElements,
+                           int amountSpins) {
+
+        ResultController resultController = new ResultController();
+        ArrayList<Integer> result = resultController.getStartMatrix(amountSpinVisibleElements, amountSpins);
+        System.out.println(height);
         background = new Background();
-        background.initialize(width, height);
+        background.initialize(width, height, amountSpinVisibleElements);
         spinLine = new SpinLine();
-        spinLine.initialize(width, height, 30, 1, result, textureAtlas);
+        spinLine.initialize(width, height, 30, 1, result, textureAtlas, amountSpinVisibleElements, amountSpins);
         spinLine2 = new SpinLine();
-        spinLine2.initialize(width, height, 40, 2, result, textureAtlas);
+        spinLine2.initialize(width, height, 40, 2, result, textureAtlas, amountSpinVisibleElements, amountSpins);
         spinLine3 = new SpinLine();
-        spinLine3.initialize(width, height, 50, 3, result, textureAtlas);
+        spinLine3.initialize(width, height, 50, 3, result, textureAtlas, amountSpinVisibleElements, amountSpins);
         spinLine4 = new SpinLine();
-        spinLine4.initialize(width, height, 60, 4, result, textureAtlas);
+        spinLine4.initialize(width, height, 60, 4, result, textureAtlas, amountSpinVisibleElements, amountSpins);
         spinLine5 = new SpinLine();
-        spinLine5.initialize(width, height, 70, 5, result, textureAtlas);
+        spinLine5.initialize(width, height, 70, 5, result, textureAtlas, amountSpinVisibleElements, amountSpins);
 
         startButton = new StartButton();
         startButton.initialize(width, height);
