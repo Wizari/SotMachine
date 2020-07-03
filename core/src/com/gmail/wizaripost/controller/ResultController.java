@@ -3,13 +3,11 @@ package com.gmail.wizaripost.controller;
 import java.util.ArrayList;
 
 public class ResultController {
-    public ArrayList<Integer> getRandomResult() {
+    public ArrayList<Integer> getResult() {
         ArrayList array = new ArrayList<Integer>();
         int a = 1; // Начальное значение диапазона - "от"
         int b = 7; // Конечное значение диапазона - "до"
         int randomNumber = a + (int) (Math.random() * b);
-//        int randomNumber = 2;
-
             for (int i = 0; i < 15; i++) {
                 array.add(randomNumber);
             }

@@ -50,7 +50,7 @@ public class SpinLine {
      * @param height      высота экрана приложения
      * @param size        количество карт в колоде
      * @param id          порядковый номер колеса(от 1 до 5)
-     * @param startMatrix матрица
+     * @param startMatrix матрица для отрисовки стартового экрана
      */
     public void initialize(float width, float height, int size, int id,
                            ArrayList<Integer> startMatrix) {
@@ -69,16 +69,12 @@ public class SpinLine {
         for (int i = (id * 6) - 6; i < id * 6; i++) {
             if (i >= (((id * 6) - 6) + 2) && i <= (((id * 6) - 6) + 4)) {
                 if (i == ((id * 6) - 6) + 2) {
-                    System.out.println("A = " + i + " / " + startMatrix.get(i) + ".jpg");
-                    System.out.println(startMatrix);
                     cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
                 }
                 if (i == ((id * 6) - 6) + 3) {
-                    System.out.println("B = " + i + " / " + startMatrix.get(i) + ".jpg");
                     cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
                 }
                 if (i == ((id * 6) - 6) + 4) {
-                    System.out.println("C = " + i + " / " + startMatrix.get(i) + ".jpg");
                     cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
                 }
             } else {
@@ -161,13 +157,13 @@ public class SpinLine {
                     }
                 }
                 if (on3) {
-                    if (cardX.winCard && cardX.position.y <= 500f && cardX.position.y >= 40f) {
+                    if (cardX.winCard && cardX.position.y <= 500f && cardX.position.y >= 30f) {
                         on = true;
                         on3 = false;
                     }
                 }
                 if (on4) {
-                    if (cardX.winCard && cardX.position.y <= 40f && cardX.position.y >= 10f) {
+                    if (cardX.winCard && cardX.position.y <= 30f && cardX.position.y >= 10f) {
                         on = true;
                         on4 = false;
                     }
@@ -268,51 +264,4 @@ public class SpinLine {
         setState(Card.State.MOVE);
     }
 
-    public void setMoveTrigger(boolean moveTrigger) {
-        this.moveTrigger = moveTrigger;
-    }
-
-    public void setLockButtonStart(boolean lockButtonStart) {
-        this.lockButtonStart = lockButtonStart;
-    }
 }
-
-
-//        switch (cardX.state) {
-//            case MOVE:
-//
-//                if (moveTrigger) {
-////                    if (cardX.position.y < 1000 && cardX.winCard) {
-////                        System.out.println("111");
-////                        cardX.slowdown.y = 0.0f;
-////                        cardX
-////
-////                    }
-//
-//
-//                    if (cardX.velocity.y >= -0.8f) {
-////                    cardX.velocity.y = -0.3f;
-//                        cardX.slowdown.y = 0.0f;
-//                        if (cardX.position.y <= 0.9f && cardX.position.y >= -0.9f && cardX.winCard) {
-//                            System.out.println(cardX.position.y);
-//                            moveTrigger = false;
-//                            lockButtonStart = false;
-//                        }
-//                    }
-//                }
-//
-//                if (!moveTrigger) {
-//                    cardX.state = Card.State.STAY;
-//                    cardX.slowdown.y = 0.0f;
-//                    cardX.velocity.y = 0.0f;
-//                }
-//                break;
-//
-//
-//            case STAY:
-//                if (!moveTrigger) {
-//                    moveTrigger = true;
-//                }
-//
-//                break;
-//        }

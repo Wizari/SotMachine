@@ -1,8 +1,8 @@
 package com.gmail.wizaripost.utility;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.gmail.wizaripost.gameobjects.Card;
 
@@ -21,14 +21,9 @@ public class DeckCreatorClass {
         int a = 1;
         int b = 2;
         int c = 3;
-//        for (int i = 0; i < 3; i++) {
-//
-//
-//        }
         a = result.get(3 * (id - 1));
-        b = result.get((3 * (id - 1))+1);
-        c = result.get((3 * (id - 1))+2);
-
+        b = result.get((3 * (id - 1)) + 1);
+        c = result.get((3 * (id - 1)) + 2);
 
         for (int j = 0; j < array.size; j++) {
             if (array.get(j).position.y <= 0.9f && array.get(j).position.y >= -0.9f) {
@@ -47,36 +42,38 @@ public class DeckCreatorClass {
         yPosition = array.get(idStartElement).position.y;
         Card card;
         int skip = 0;
+        TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/sprites.txt"));
 
         for (int i = 5; i < size; i++) {
-            Texture cardTexture = new Texture(Gdx.files.internal(a + ".jpg"));
             card = new Card();
             if (i >= size - 10) {
+                if (skip > 4) {
+                    card.cardSprite = new Sprite(textureAtlas.findRegion(GetCardTextureName.getRandomSpriteSheetUnitName()));
+                }
                 if (skip == 4) {
-                    cardTexture = new Texture(Gdx.files.internal(c + ".jpg"));
+                    card.cardSprite = new Sprite(textureAtlas.findRegion("" + c));
                     skip++;
                 }
                 if (skip == 3) {
-                    cardTexture = new Texture(Gdx.files.internal(b + ".jpg"));
+                    card.cardSprite = new Sprite(textureAtlas.findRegion("" + b));
                     skip++;
                 }
                 if (skip == 2) {
-                    cardTexture = new Texture(Gdx.files.internal(a + ".jpg"));
+                    card.cardSprite = new Sprite(textureAtlas.findRegion("" + a));
                     skip++;
                 }
                 if (skip == 1) {
-                    cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+                    card.cardSprite = new Sprite(textureAtlas.findRegion(GetCardTextureName.getRandomSpriteSheetUnitName()));
                     skip++;
                 }
                 if (skip == 0) {
-                    cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+                    card.cardSprite = new Sprite(textureAtlas.findRegion(GetCardTextureName.getRandomSpriteSheetUnitName()));
                     card.winCard = true;
                     skip++;
                 }
             } else {
-                cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+                card.cardSprite = new Sprite(textureAtlas.findRegion(GetCardTextureName.getRandomSpriteSheetUnitName()));
             }
-            card.cardSprite = new Sprite(cardTexture);
             card.cardSprite.setSize(example.cardSprite.getWidth(), example.cardSprite.getHeight()); // устанавливаем размер спрайта
             card.state = Card.State.STAY;
             card.cardSprite.setPosition(xPosition, yPosition + range);

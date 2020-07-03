@@ -2,9 +2,7 @@ package com.gmail.wizaripost.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.gmail.wizaripost.SlotMachineCore;
 import com.gmail.wizaripost.controller.ResultController;
-import com.gmail.wizaripost.gameobjects.SpinLine;
 import com.gmail.wizaripost.gameobjects.StartButton;
 
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class InputManager {
         if ((touchX >= StartButton.startButtonSprite.getX()) && touchX <= (StartButton.startButtonSprite.getX() + StartButton.startButtonSprite.getWidth()) && (touchY >= StartButton.startButtonSprite.getY()) && touchY <= (StartButton.startButtonSprite.getY() + StartButton.startButtonSprite.getHeight())) {
 
             ResultController resultController = new ResultController();
-            this.result = resultController.getRandomResult();
+            this.result = resultController.getResult();
             if (!gameManager.spinLine.lockButtonStart &&
                     !gameManager.spinLine2.lockButtonStart &&
                     !gameManager.spinLine3.lockButtonStart &&

@@ -31,7 +31,7 @@ public class GameManager {
         background = new Background();
         background.initialize(width, height);
         spinLine = new SpinLine();
-        spinLine.initialize(width, height, 30, 1, result);//TODO
+        spinLine.initialize(width, height, 30, 1, result);
         spinLine2 = new SpinLine();
         spinLine2.initialize(width, height, 40, 2, result);
         spinLine3 = new SpinLine();
@@ -39,7 +39,7 @@ public class GameManager {
         spinLine4 = new SpinLine();
         spinLine4.initialize(width, height, 60, 4, result);
         spinLine5 = new SpinLine();
-        spinLine5.initialize(width, height, 75, 5, result);
+        spinLine5.initialize(width, height, 70, 5, result);
 
         startButton = new StartButton();
         startButton.initialize(width, height);
