@@ -1,6 +1,5 @@
 package com.gmail.wizaripost.gameobjects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -36,18 +35,28 @@ public class SpinLine {
     public boolean lockButtonStart = true;
     int id;
     ArrayList<Integer> result;
+
     public enum LineSpeed {MAX, HIGH, AVERAGE, MIN, STAY} // определение состояний
+
     LineSpeed lineSpeed = LineSpeed.STAY;
     ResultController resultController;
     private TextureAtlas textureAtlas;
+    boolean on = false;
+    boolean on0 = true;
+    boolean on1 = true;
+    boolean on2 = true;
+    boolean on3 = true;
+    boolean on4 = true;
+    boolean on5 = true;
 
 
     /**
-     * @param width       ширина экрана приложения
-     * @param height      высота экрана приложения
-     * @param size        количество карт в колоде
-     * @param id          порядковый номер колеса(от 1 до 5)
-     * @param startMatrix матрица для отрисовки стартового экрана
+     * @param width        ширина экрана приложения
+     * @param height       высота экрана приложения
+     * @param size         количество карт в колоде
+     * @param id           порядковый номер колеса(от 1 до 5)
+     * @param startMatrix  матрица для отрисовки стартового экрана
+     * @param textureAtlas TextureAtlas карточек
      */
     public void initialize(float width, float height, int size, int id,
                            ArrayList<Integer> startMatrix, TextureAtlas textureAtlas) {
@@ -66,28 +75,24 @@ public class SpinLine {
         Card card;
         for (int i = (id * 6) - 6; i < id * 6; i++) {
             if (i >= (((id * 6) - 6) + 2) && i <= (((id * 6) - 6) + 4)) {
+                card = new Card();
                 if (i == ((id * 6) - 6) + 2) {
-                    cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
+                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
                 }
                 if (i == ((id * 6) - 6) + 3) {
-                    cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
+                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
                 }
                 if (i == ((id * 6) - 6) + 4) {
-                    cardTexture = new Texture(Gdx.files.internal(startMatrix.get(i) + ".jpg"));
+                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
                 }
             } else {
-                cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
+                card = new Card();
+                card.cardSprite = new Sprite(textureAtlas.findRegion(GetCardTextureName.getRandomSpriteSheetUnitName()));
             }
-//            cardTexture = new Texture(Gdx.files.internal(GetCardTextureName.getRandomTextureName()));
-            card = new Card();
-            card.cardSprite = new Sprite(cardTexture);// загружаем текстуру корзины в спрайт
             float XWidth = card.cardSprite.getWidth() * (width / CARD_RESIZE_FACTOR);
             card.cardSprite.setSize(XWidth, card.cardSprite.getHeight() * (width / CARD_RESIZE_FACTOR)); // устанавливаем размер спрайта
-//            card.cardSprite.setRegion(0, 0, (int)(width/scaleFactor), (int)(currentHeight/scaleFactor));
-
             card.state = Card.State.STAY;
             if (xPosition == 0) {
-//                f = XWidth;
                 xPosition = Helper.getXPosition(width, XWidth, 10, id);
             }
 
@@ -102,19 +107,9 @@ public class SpinLine {
             }
             cards.add(card);
             range += card.cardSprite.getHeight() + 6;
-//            System.out.println(card.position.x +" - "+ card.position.y);
-
             lockButtonStart = false;
         }
     }
-
-    boolean on = false;
-    boolean on0 = true;
-    boolean on1 = true;
-    boolean on2 = true;
-    boolean on3 = true;
-    boolean on4 = true;
-    boolean on5 = true;
 
     public void update(Card cardX, int numberElement) {
         switch (cardX.state) {
