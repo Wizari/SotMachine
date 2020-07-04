@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gmail.wizaripost.controller.ResultController;
 import com.gmail.wizaripost.utility.DeckCreatorClass;
-import com.gmail.wizaripost.utility.GetCardTextureName;
 import com.gmail.wizaripost.utility.Helper;
 import lombok.Data;
 import lombok.Getter;
@@ -79,23 +78,8 @@ public class SpinLine {
 
         Card card;
         for (int i = (id * 6) - 6; i < id * 6; i++) {
-//            if (i >= (((id * 6) - 6) + 2) && i <= (((id * 6) - 6) + 4)) {
-                card = new Card();
-//                if (i == ((id * 6) - 6) + 2) {
-                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
-//                }
-//                if (i == ((id * 6) - 6) + 3) {
-//                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
-//                }
-//                if (i == ((id * 6) - 6) + 4) {
-//                    card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
-//                }
-//            } else {
-//                card = new Card();
-//                card.cardSprite = new Sprite(textureAtlas.findRegion(GetCardTextureName.getRandomSpriteSheetUnitName()));
-//            }
-
-
+            card = new Card();
+            card.cardSprite = new Sprite(textureAtlas.findRegion(startMatrix.get(i) + ""));
             float XWidth = card.cardSprite.getWidth() * (width / CARD_RESIZE_FACTOR);
             card.cardSprite.setSize(XWidth, card.cardSprite.getHeight() * (width / CARD_RESIZE_FACTOR)); // устанавливаем размер спрайта
             card.state = Card.State.STAY;
@@ -152,12 +136,12 @@ public class SpinLine {
                     }
                 }
                 if (on4) {
-                    if (cardX.winCard && cardX.position.y <= yPosition+30f && cardX.position.y >= yPosition + 10f) {
+                    if (cardX.winCard && cardX.position.y <= yPosition + 30f && cardX.position.y >= yPosition + 10f) {
                         on = true;
                         on4 = false;
                     }
                 }
-                if (cardX.winCard && cardX.position.y <= yPosition+0.9f && cardX.position.y >= yPosition-0.9f) {
+                if (cardX.winCard && cardX.position.y <= yPosition + 0.9f && cardX.position.y >= yPosition - 0.9f) {
                     on5 = false;
                 }
                 switch (lineSpeed) {
@@ -173,7 +157,7 @@ public class SpinLine {
                     case MIN:
                         cardX.velocity.y = -0.8f;
 
-                        if (cardX.position.y <= yPosition + 0.9f && cardX.position.y >= yPosition -0.9f && cardX.winCard) {
+                        if (cardX.position.y <= yPosition + 0.9f && cardX.position.y >= yPosition - 0.9f && cardX.winCard) {
                             lineSpeed = LineSpeed.STAY;
                             System.out.println(cardX.position.y);
                             moveTrigger = false;

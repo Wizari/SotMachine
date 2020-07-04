@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class Card {
-
     public Sprite cardSprite; // спрайт для отображения карты
     public float heightCard,widthCard; // размеры карты
     public Vector2 position = new Vector2(); // вектор для обозначения позиции
