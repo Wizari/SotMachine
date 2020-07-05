@@ -9,9 +9,10 @@ import java.util.ArrayList;
 
 public class InputManager {
 
-    ArrayList<Integer> result;
-    int amountSpinVisibleElements;
-    int amountSpins;
+    private ArrayList<Integer> result;
+    private int amountSpinVisibleElements;
+    private int amountSpins;
+    private ResultController resultController = new ResultController();
 
 
     public void handleInput(OrthographicCamera camera,
@@ -44,13 +45,12 @@ public class InputManager {
         // определяем, было ли касание кнопки start, используя границы спрайта
         if ((touchX >= StartButton.startButtonSprite.getX()) && touchX <= (StartButton.startButtonSprite.getX() + StartButton.startButtonSprite.getWidth()) && (touchY >= StartButton.startButtonSprite.getY()) && touchY <= (StartButton.startButtonSprite.getY() + StartButton.startButtonSprite.getHeight())) {
 
-            ResultController resultController = new ResultController();
-            this.result = resultController.getResult(amountSpinVisibleElements, amountSpins);
             if (!gameManager.spinLine.lockButtonStart &&
                     !gameManager.spinLine2.lockButtonStart &&
                     !gameManager.spinLine3.lockButtonStart &&
                     !gameManager.spinLine4.lockButtonStart &&
                     !gameManager.spinLine5.lockButtonStart) {
+                this.result = resultController.getResult(amountSpinVisibleElements, amountSpins);
 
                 gameManager.spinLine.reRun(result);
                 gameManager.spinLine2.reRun(result);
